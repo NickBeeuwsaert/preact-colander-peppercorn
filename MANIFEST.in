@@ -1,0 +1,2 @@
+recursive-include pcp/templates *.jinja2
+recursive-include pcp/static *

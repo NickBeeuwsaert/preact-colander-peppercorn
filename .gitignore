@@ -1,0 +1,12 @@
+# PYTHON CACHE
+*.py[cod]
+__pycache__/
+
+# VENV
+venv/
+
+# SETUPTOOLS
+*.egg-info/
+
+# NODE
+node_modules

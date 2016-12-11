@@ -1,0 +1,14 @@
+{% extends 'layouts/default.jinja2' %}
+
+{% block title %}Index{% endblock %}
+
+{% block scripts %}
+    <script src="{{ req.static_url('pcp:static/js/main.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="content"></div>
+    <script>
+        Form.init({{ data|default({})|jsonify|safe }}, '#content');
+    </script>
+{% endblock %}
