@@ -10,13 +10,13 @@ setup(
     ],
     install_requires=[
         'pyramid',
-        'pyramid-jinja2',
+        'pyramid_jinja2',
         'colander',
         'peppercorn'
     ],
     extras_require={
         'dev': [
-            'pyramid-debugtoolbar'
+            'pyramid_debugtoolbar'
         ]
     },
     entry_points={
