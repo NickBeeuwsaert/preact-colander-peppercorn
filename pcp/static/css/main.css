@@ -47,10 +47,17 @@ html, body {
 .btn {
     font-size: 1em;
     padding: 0.5em;
+    margin: 0.5em;
+    cursor: pointer;
 
     background: #ccc;
     color: black;
     border: 0;
+}
+
+.btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .btn.primary {
@@ -58,8 +65,30 @@ html, body {
     color: white;
 }
 
+.remove {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* I KNOW `.text-right` IS NOT A SEMANTIC CLASS NAME, CHILL OUT */
+.text-right {
+    text-align: right;
+}
+
 .book-section, .chapter-section {
     border: 1px solid black;
-    margin: 0.5em;
-    padding: 0.5em;
+    margin: 0.5em 0;
+    padding: 1em;
+    position: relative;
+    border-radius: 5px;
 }
+
+.book-section {
+    background: #e0e0e0;
+}
+
+.chapter-section {
+    background: white;
+}
+
