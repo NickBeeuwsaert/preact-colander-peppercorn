@@ -1,15 +1,14 @@
 import preact from 'preact';
 import Component from '../component';
 import Book from './Book';
-import ErrorList from './ErrorList';
 import {Marker} from './peppercorn.js';
 import {get} from '../utils';
-import {book as defaultBook} from '../defaultState';
+import defaults from '../defaultState';
 
 export default class Books extends Component {
     addBook() {
         let {books} = this.props;
-        books.push({...defaultBook});
+        books.push(defaults.book);
         this.props.onChange({books});
     }
 

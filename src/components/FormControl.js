@@ -1,5 +1,6 @@
 import preact from 'preact';
 import Component from '../component';
+import ErrorList from './ErrorList';
 
 export default class FormControl extends Component {
     render({

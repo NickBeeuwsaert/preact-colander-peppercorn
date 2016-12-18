@@ -3,20 +3,18 @@ import preact from 'preact';
 import Component from '../component';
 import FormControl from './FormControl';
 import Books from './Books';
-import ErrorList from './ErrorList';
 import {get} from '../utils';
-import {bookList} from '../defaultState';
+import defaults from '../defaultState';
+
+let defaultBookList = defaults.bookList;
 
 export default class Form extends Component {
     constructor({
-        books=bookList.books,
-        name=bookList.name
-    }={bookList}) {
+        books=defaultBookList.books,
+        name=defaultBookList.name
+    }) {
         super();
-
-        this.state = {
-            books, name
-        };
+        this.state = {books, name};
     }
 
     render({

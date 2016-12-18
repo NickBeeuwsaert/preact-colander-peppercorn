@@ -1,14 +1,20 @@
-export let chapter = {
-    title: ''
-};
-
-export let book = {
-    title: '',
-    author: '',
-    chapters: [chapter]
-};
-
-export let bookList = {
-    name: '',
-    books: [book]
+export default {
+    get chapter() {
+        return {
+            title: ''
+        };
+    },
+    get book() {
+        return {
+            title: '',
+            author: '',
+            chapters: [this.chapter]
+        };
+    },
+    get bookList() {
+        return {
+            name: '',
+            books: [this.book]
+        };
+    }
 };

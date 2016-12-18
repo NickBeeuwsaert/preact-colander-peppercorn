@@ -1,16 +1,15 @@
 import preact from 'preact';
 import Component from '../component';
 import Chapter from './Chapter';
-import ErrorList from './ErrorList';
 import {Marker} from './peppercorn.js';
 import {get} from '../utils';
-import {chapter as defaultChapter} from '../defaultState';
+import defaults from '../defaultState';
 
 export default class Chapters extends Component {
 
     addChapter() {
         let {chapters} = this.props;
-        chapters.push({...defaultChapter});
+        chapters.push({...defaults.chapter});
 
         this.props.onChange({chapters});
     }
