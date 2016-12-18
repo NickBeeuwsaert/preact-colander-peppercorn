@@ -1,29 +1,47 @@
 import logging
 import pprint
 
-from pyramid.view import view_config
+import colander
 import peppercorn
+from pyramid.view import view_config, view_defaults
 
 from pcp.schemas import BookListSchema
+from pcp.form import Form, FormException
 
 log = logging.getLogger(__name__)
 
-@view_config(route_name='index', renderer='index.jinja2')
-def index(request):
-    book_list_schema = BookListSchema()
 
-    if request.method == 'POST':
-        pstruct = peppercorn.parse(request.POST.items())
+@view_defaults(
+    route_name='index',
+    renderer='index.jinja2'
+)
+class FormView(object):
+    def __init__(self, request):
+        self.request = request
 
-        appstruct = book_list_schema.deserialize(pstruct)
+    @view_config(request_method='POST')
+    def post_index(self):
+        pstruct = peppercorn.parse(self.request.POST.items())
+        form = Form(BookListSchema())
+        try:
+            data = form.validate(pstruct)
 
-        log.debug(pprint.format(appstruct))
+            log.info(data)
+        except FormException as e:
+            return dict(
+                data=pstruct,
+                errors=e.prepare()
+            )
 
         return dict(
-            data=appstruct
+            data=pstruct
         )
-    return {}
 
+    @view_config(request_method='GET')
+    def get_index(self):
+        return dict(
+            data={}
+        )
 
 def includeme(config):
     config.scan(__name__)
