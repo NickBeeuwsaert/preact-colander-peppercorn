@@ -1,14 +1,12 @@
 import preact from 'preact';
+import {pop} from '../utils';
 
 
 export const Marker = function(props) {
-    let {name='', type, children} = props;
-
-    // dirty, dirty hack because I can't use
-    // object rest in object destructuring
-    delete props.name;
-    delete props.type;
-    delete props.children;
+    // Buble doesn't support object rest, ok?
+    let type = pop(props, 'type'),
+        name = pop(props, 'name', ''),
+        children = pop(props, 'children', []);
 
     return (
         <div {...props}>

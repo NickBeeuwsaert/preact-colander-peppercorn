@@ -1,42 +1,51 @@
 import preact from 'preact';
-import BookForm from './BookForm';
 
-export default class Form extends preact.Component {
+import Component from '../component';
+import FormControl from './FormControl';
+import Books from './Books';
+import ErrorList from './ErrorList';
+import {get} from '../utils';
+import {bookList} from '../defaultState';
 
-    constructor({books=[
-        {
-            title: '',
-            chapters: [
-                {
-                    title: ''
-                }
-            ]
-        }
-    ], name}) {
+export default class Form extends Component {
+    constructor({
+        books=bookList.books,
+        name=bookList.name
+    }={bookList}) {
         super();
 
-        this.setState({books, name});
+        this.state = {
+            books, name
+        };
     }
 
-    updateBooks({books}) {
-        this.setState({books});
-    }
-
-    render({method='POST', action=''}, {books, name}) {
+    render({
+        method='POST', action='',
+        errors
+    }, {books, name}) {
         return <form method={method} action={action}>
             <h1>Book list</h1>
-            <div class="form-group">
-                <label>List name</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={name}
-                    class="form-control"
-                    onInput={this.linkState('name')}
-                />
+            {get(errors, 'errors', []).map(err => (
+                <div class="flash error">{err}</div>
+            ))}
+            <FormControl
+                label="List Name"
+                name="name"
+                value={name}
+                onInput={this.linkState('name')}
+                errors={get(errors, 'child_errors.name.errors')}
+            />
+            <Books
+                books={books}
+                onChange={this.setState.bind(this)}
+                errors={get(errors, 'child_errors.books', {})}
+            />
+            <div class="text-right">
+                <button
+                    class="btn primary"
+                    type="submit"
+                >&#x2713; Create list</button>
             </div>
-            <BookForm books={books} onChange={this.updateBooks.bind(this)}/>
-            <button>Create list</button>
         </form>;
     }
 }

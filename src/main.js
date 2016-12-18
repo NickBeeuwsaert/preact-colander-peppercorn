@@ -1,9 +1,16 @@
 import preact, {render} from 'preact';
 import Form from './components/Form';
 
-export function init(data, target) {
-    if(typeof target === 'string')
-        target = document.querySelector(target);
+const $$ = selector => document.querySelectorAll(selector),
+      $  = selector => document.querySelector(selector);
 
-    render(<Form {...data}/>, target);
-}
+const currentScript = document.currentScript || (function(scripts) {
+    return scripts[scripts.length-1];
+})($$('script'));
+
+const data   = JSON.parse(currentScript.getAttribute('data-data')),
+      errors = JSON.parse(currentScript.getAttribute('data-errors')),
+      target = $(currentScript.getAttribute('data-target'));
+
+
+render(<Form {...data} errors={errors}/>, target);

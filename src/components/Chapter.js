@@ -1,23 +1,19 @@
 import preact from 'preact';
+import Component from '../component';
+import ErrorList from './ErrorList';
 import {Marker} from './peppercorn';
+import {get} from '../utils';
 
-export default class Chapter extends preact.Component {
-    get handleChange() {
-        return this.props.onChange;
-    }
-
-    changeTitle(e) {
-        this.handleChange({
-            title: e.target.value
-        });
-    }
-
-
-    render({onRemoveChapter, title}) {
+export default class Chapter extends Component {
+    render({
+        title,
+        onRemoveChapter, 
+        errors
+    }) {
         return <Marker type="mapping" class="chapter-section">
-            <button type="button" onClick={onRemoveChapter}>
-                Remove Chapter
-            </button>
+            {get(errors, 'errors', []).map(err => (
+                <div class="flash error">{err}</div>
+            ))}
             <div class="form-group">
                 <label>Chapter Title</label>
                 <input
@@ -25,8 +21,19 @@ export default class Chapter extends preact.Component {
                     name="title"
                     value={title}
                     class="form-control"
-                    onInput={this.changeTitle.bind(this)}
+                    onInput={this.handleInput.bind(this)}
                 />
+                <ErrorList
+                    {...get(errors, 'child_errors.title')}
+                />
+            </div>
+            <div class="text-right">
+                <button
+                    type="button"
+                    onClick={onRemoveChapter}
+                    disabled={!onRemoveChapter}
+                    class="btn"
+                >&minus; Remove Chapter</button>
             </div>
         </Marker>;
     }
