@@ -44,21 +44,24 @@ export default class Form extends Component {
 
   render({
     method='POST', action='',
-    errors
+    errors: {
+      errors=[],
+      child_errors={}
+    }
   }, {books, name}) {
     return <form method={method} action={action}>
       <h1>Book list</h1>
-      {get(errors, 'errors', []).map(err => <div class="flash error">{err}</div>)}
+      {errors.map(err => <div class="flash error">{err}</div>)}
       <FormControl
         label="List Name"
         name="name"
         value={name}
         onInput={this.linkState('name')}
-        errors={get(errors, 'child_errors.name.errors')}
+        errors={get(child_errors, 'name.errors')}
       />
       <h2>Books</h2>
       <Marker type="sequence" name="books">
-        {get(errors, 'child_errors.books.errors', []).map(err => <div class="flash error">{err}</div>)}
+        {get(child_errors, 'books.errors', []).map(err => <div class="flash error">{err}</div>)}
         {books.map(({title, author, chapters, date_published}, idx) => <Book
           title={title}
           chapters={chapters}
@@ -66,7 +69,7 @@ export default class Form extends Component {
           date_published={date_published}
           onRemoveBook={books.length > 1 ? this.removeBook.bind(this, idx) : null}
           onChange={this.updateBook.bind(this, idx)}
-          errors={get(errors, ['child_errors', 'books', 'child_errors', idx], {})}
+          errors={get(child_errors, ['books', 'child_errors', idx], {})}
         />)}
       </Marker>
       <div class="text-right">

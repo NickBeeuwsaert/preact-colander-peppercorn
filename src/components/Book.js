@@ -37,30 +37,33 @@ export default class Book extends Component {
   render({
     chapters=[], author, date_published, title,
     onRemoveBook,
-    errors
+    errors: {
+      errors=[],
+      child_errors={}
+    }
   }) {
     return <Marker type="mapping" class="book-section">
-      {get(errors, 'errors', []).map(err => <div class="flash error">{err}</div>)}
+      {errors.map(err => <div class="flash error">{err}</div>)}
       <FormControl
         label="Book Title"
         name="title"
         value={title}
         onInput={this.handleInput.bind(this)}
-        errors={get(errors, 'child_errors.title.errors')}
+        errors={get(child_errors, 'title.errors')}
       />
       <FormControl
         label="Author"
         name="author"
         value={author}
         onInput={this.handleInput.bind(this)}
-        errors={get(errors, 'child_errors.author.errors')}
+        errors={get(child_errors, 'author.errors')}
       />
       <FormControl
         label="Date Published"
         name="date_published"
         value={date_published}
         onInput={this.handleInput.bind(this)}
-        errors={get(errors, 'child_errors.date_published.errors')}
+        errors={get(child_errors, 'date_published.errors')}
       />
       <h3>Chapters</h3>
       {get(errors, 'child_errors.chapters.errors', []).map(err => <div class="flash error">{err}</div>)}
@@ -69,7 +72,7 @@ export default class Book extends Component {
           title={title}
           onRemoveChapter={chapters.length > 1 ? this.removeChapter.bind(this, idx) : null}
           onChange={this.updateChapter.bind(this, idx)}
-          errors={get(errors, ['child_errors', 'chapters', 'child_errors', idx, 'errors'], [])}
+          errors={get(child_errors, ['chapters', 'child_errors', idx], [])}
         />)}
       </Marker>
       <div class="text-right">
