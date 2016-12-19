@@ -1,5 +1,4 @@
 import preact from 'preact';
-import Component from '../component';
 
 export default ({errors=[]}) => (
     errors && errors.length ?

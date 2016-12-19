@@ -1,21 +1,18 @@
 import preact from 'preact';
-import Component from '../component';
 import ErrorList from './ErrorList';
 
-export default class FormControl extends Component {
-  render({
-    label, name, value,
-    onInput,
-    errors
-  }) {
-    return <div class="form-group">
-      <label>{label}</label>
-      <input
-        type="text"
-        class="form-control"
-        {...{name, value, onInput}}
-      />
-      <ErrorList errors={errors}/>
-    </div>;
-  }
-}
+export default ({
+  label, name, value, type="text",
+  onInput,
+  errors=[]
+}) => <div class="form-group">
+  <label>{label}</label>
+  <input
+    type={type}
+    value={value}
+    name={name}
+    onInput={onInput}
+    class="form-control"
+  />
+  <ErrorList errors={errors}/>
+</div>;

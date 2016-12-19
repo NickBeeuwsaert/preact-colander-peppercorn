@@ -1,6 +1,6 @@
 import preact from 'preact';
-import {pop} from '../utils';
 
+import {pop} from '../utils';
 
 export const Marker = function(props) {
   // Buble doesn't support object rest, ok?
