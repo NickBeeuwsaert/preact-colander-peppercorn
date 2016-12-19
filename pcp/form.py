@@ -12,7 +12,7 @@ class FormException(Exception):
                     else s
                     for s in exc.messages()
                 ],
-                child_errors={
+                children={
                     child.pos if child.positional
                     else child.node.name: traverse(child)
                     for child in exc.children
