@@ -4,7 +4,11 @@
   "description": "## What now? Get set up for development!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c",
+    "watch": "rollup -c --watch",
+    "uglify": "uglifyjs pcp/static/js/main.js -o pcp/static/js/main.min.js --source-map pcp/static/js/main.min.js.map",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm run build; npm run uglify"
   },
   "author": "",
   "license": "MIT",
@@ -13,6 +17,7 @@
     "rollup": "^0.37.0",
     "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-watch": "^2.5.0"
+    "rollup-watch": "^2.5.0",
+    "uglifyjs": "^2.4.10"
   }
 }
