@@ -6,6 +6,8 @@ export default {
     dest: 'pcp/static/js/main.js',
     format: 'umd',
     moduleName: 'Form',
+    sourceMap: true,
+    sourceMapFile: 'pcp/static/js/main.js.map',
     plugins: [
         buble({
             jsx: 'preact.h',
