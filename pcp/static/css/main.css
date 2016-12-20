@@ -85,7 +85,7 @@ html, body {
 }
 
 .book-section {
-    background: #e0e0e0;
+    background: hsl(240, 50%, 95%);
 }
 
 .chapter-section {
