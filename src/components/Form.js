@@ -37,14 +37,13 @@ export default class Form extends Component {
       children: child_errors={}
     }
   }) {
-    console.log({books, name});
     return <form method={method} action={action}>
       <h1>Book list</h1>
       {errors.map(err => <Flash type="error">{err}</Flash>)}
       <FormControl
         label="List Name" name="name" value={name}
         onInput={this.handleInput.bind(this)}
-        errors={get(child_errors, 'name.errors')}
+        errors={get(child_errors, 'name.errors', [])}
       />
       <h2>Books</h2>
       <Marker type="sequence" name="books">

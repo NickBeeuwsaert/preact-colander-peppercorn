@@ -45,17 +45,17 @@ export default class Book extends Component {
       <FormControl
         label="Book Title" name="title" value={title}
         onInput={this.handleInput.bind(this)}
-        errors={get(child_errors, 'title.errors')}
+        errors={get(child_errors, 'title.errors', [])}
       />
       <FormControl
         label="Author" name="author" value={author}
         onInput={this.handleInput.bind(this)}
-        errors={get(child_errors, 'author.errors')}
+        errors={get(child_errors, 'author.errors', [])}
       />
       <FormControl
         label="Date Published" name="date_published" value={date_published}
         onInput={this.handleInput.bind(this)}
-        errors={get(child_errors, 'date_published.errors')}
+        errors={get(child_errors, 'date_published.errors', [])}
       />
       <h3>Chapters</h3>
       {get(child_errors, 'chapters.errors', []).map(

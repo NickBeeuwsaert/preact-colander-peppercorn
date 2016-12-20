@@ -20,7 +20,7 @@ export default class Chapter extends Component {
       <FormControl
         label="Chapter Title" name="title" value={title}
         onInput={this.handleInput.bind(this)}
-        errors={get(child_errors, 'title.errors')}
+        errors={get(child_errors, 'title.errors', [])}
       />
       <div class="text-right">
         <button
