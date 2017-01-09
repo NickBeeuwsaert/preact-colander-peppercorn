@@ -8,7 +8,7 @@
 {% block content %}
     <div id="content"></div>
     <script
-        src="{{ req.static_path('pcp:static/js/main.js') }}"
+        src="{{ req.static_url('pcp:static/js/main.js', _scheme=None) }}"
         data-data="{{ data|jsonify }}"
         data-errors="{{ errors|d({})|jsonify }}"
         data-target="#content"
